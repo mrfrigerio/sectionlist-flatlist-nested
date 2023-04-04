@@ -59,8 +59,8 @@ export default function App() {
       <SectionList
         sections={team}
         keyExtractor={(item, index) => item.key}
-        renderSectionHeader={({ section: title }) => (
-          <Text>{title.title.description}</Text>
+        renderSectionHeader={({ section: { title } }) => (
+          <Text>{title.name}</Text>
         )}
         renderItem={({ item, index, section }) => (
           <FlatList
