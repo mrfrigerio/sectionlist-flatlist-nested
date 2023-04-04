@@ -11,14 +11,14 @@ interface IData {
   list: IPerson[];
 }
 interface IGroup {
-  title: string;
+  title: { name: string; description: string };
   data: IData[];
   key: string;
 }
 
 const team: IGroup[] = [
   {
-    title: "G1",
+    title: { name: "G1", description: "bla bla bla" },
     key: "0",
     data: [
       {
@@ -37,7 +37,7 @@ const team: IGroup[] = [
     ],
   },
   {
-    title: "G2",
+    title: { name: "G2", description: "bla bla bla" },
     key: "1",
     data: [
       {
@@ -59,11 +59,14 @@ export default function App() {
       <SectionList
         sections={team}
         keyExtractor={(item, index) => item.key}
-        renderSectionHeader={({ section: title }) => <Text>{title.title}</Text>}
+        renderSectionHeader={({ section: title }) => (
+          <Text>{title.title.description}</Text>
+        )}
         renderItem={({ item, index, section }) => (
           <FlatList
             key={item.key}
             data={item.list}
+            keyExtractor={(item, index) => item.name + index}
             numColumns={2}
             renderItem={({ item }: { item: IPerson }) => {
               return <Text>{item.name}</Text>;
